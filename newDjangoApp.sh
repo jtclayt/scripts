@@ -9,12 +9,12 @@ if [ $# -ne 1 ]; then
 fi
 
 # Make new app
-source '~/Documents/dojo/envs/djangoEnv/bin/activate'
+source ~/Documents/dojo/envs/djangoEnv/bin/activate
 python manage.py startapp "$1"
 cd "$1"
 
 # Copy skeleton files for app and add urls.py
-cp -r ~/Documents/skeletons/django_app/* .
+cp -r ~/Documents/skeletons/django/app/* .
 cat ~/Documents/skeletons/django/files/app_urls.py > urls.py
 
 commit.sh "Created app $1 in project"
