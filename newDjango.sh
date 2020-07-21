@@ -17,6 +17,10 @@ echo "Starting project $1..."
 django-admin startproject "$1"
 cd "$1"
 
+# Add static folder for root
+echo "Coppying root static folder..."
+cp -r ~/Documents/skeletons/django/static .
+
 # Create main app, add templates, static files, and update urls.py and views.py
 echo "Starting app..."
 python manage.py startapp app
