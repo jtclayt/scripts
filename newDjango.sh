@@ -12,7 +12,7 @@ if [ $# -lt 1 ]; then
 fi
 
 # Make project directory and change to it
-source '~/Documents/dojo/envs/djangoEnv/bin/activate'
+source ~/Documents/dojo/envs/djangoEnv/bin/activate
 echo "Starting project $1..."
 django-admin startproject "$1"
 cd "$1"
