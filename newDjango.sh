@@ -31,10 +31,23 @@ cat ~/Documents/skeletons/django/files/app_urls.py > urls.py
 cat ~/Documents/skeletons/django/files/views.py > views.py
 cd ..
 
+# Create users app, add templates, static files, and update urls.py and views.py
+echo "Starting users..."
+python manage.py startapp users
+cd users
+echo "Coppying templates, static, urls.py, and views.py into app..."
+cp -r ~/Documents/skeletons/django/users/static .
+cp -r ~/Documents/skeletons/django/users/templates .
+cp ~/Documents/skeletons/django/users/forms.py .
+cat ~/Documents/skeletons/django/users/urls.py > urls.py
+cat ~/Documents/skeletons/django/users/views.py > views.py
+cat ~/Documents/skeletons/django/users/models.py > models.py
+cd ..
+
 # Make changes to settings.py and urls.py in project folder
 cd "$1"
 echo "Updating settings.py and urls.py in project..."
-sed -i "s/INSTALLED_APPS = \[/INSTALLED_APPS = \[\n    'app',/" settings.py
+sed -i "s/INSTALLED_APPS = \[/INSTALLED_APPS = \[\n    'app',\n    'users',/" settings.py
 cat ~/Documents/skeletons/django/files/settings.py >> settings.py
 cat ~/Documents/skeletons/django/files/urls.py > urls.py
 cd ..
