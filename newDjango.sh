@@ -62,6 +62,8 @@ if [[ $2 == 'git' ]]; then
     rm -rf "$1"
     exit 1
   fi
+  # Add .gitignore
+  cp ~/Documents/skeletons/django/files/.gitignore .
   # Git stuff to push local repo up with an initial commit
   git init
   git remote add origin git@github.com:jtclayt/"$1".git
