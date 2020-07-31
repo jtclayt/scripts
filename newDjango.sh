@@ -17,6 +17,10 @@ echo "Starting project $1..."
 django-admin startproject "$1"
 cd "$1"
 
+# Add python interpreter setting and git ignore
+cp -r /mnt/c/Users/jtcla/Documents/projects/skeletons/django/.vscode .
+echo .vscode > .gitignore
+
 # Create main app, add templates, static files, and update urls.py and views.py
 echo "Starting app..."
 python manage.py startapp app

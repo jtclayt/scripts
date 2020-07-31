@@ -14,7 +14,7 @@ python manage.py startapp "$1"
 cd "$1"
 
 # Copy skeleton files for app and add urls.py
-cp -r /mnt/c/Users/jtcla/Documents/projects/skeletons/django_app/* .
+cp -r /mnt/c/Users/jtcla/Documents/projects/skeletons/django/app/* .
 cat /mnt/c/Users/jtcla/Documents/projects/skeletons/django/files/app_urls.py > urls.py
 
 commit.sh "Created app $1 in project"
