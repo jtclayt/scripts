@@ -15,7 +15,8 @@ dotnet new web --no-https -o "$1"
 cd "$1"
 
 # Add gitignore, copy in root level folders and files
-cp /mnt/c/Users/jtcla/Documents/projects/skeletons/dotnet/*
+cp /mnt/c/Users/jtcla/Documents/projects/skeletons/dotnet/.gitignore .
+cp -r /mnt/c/Users/jtcla/Documents/projects/skeletons/dotnet/* .
 
 if [ $# -eq 3 ] && [[ $3 == 'git' ]]; then
   echo "Creating GitHub repo..."
