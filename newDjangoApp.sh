@@ -9,7 +9,7 @@ if [ $# -ne 1 ]; then
 fi
 
 # Make new app
-source /mnt/c/Users/jtcla/Documents/projects/dojo/python/my_environments/djangoPy3Env/bin/activate
+source ~/Documents/dojo/envs/djangoEnv/bin/activate
 python manage.py startapp "$1"
 cd "$1"
 
