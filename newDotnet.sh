@@ -17,6 +17,7 @@ cd "$1"
 # Copy in base files
 cp -r $SKELETONS/dotnet/default/* .
 cat $SKELETONS/dotnet/files/Startup.cs > Startup.cs
+cat $SKELETONS/dotnet/files/csproj.txt > $1.csproj
 sed -i "s/namespace/namespace $1/" Startup.cs
 sed -i "s/namespace/namespace $1.Controllers/" Controllers/HomeController.cs
 sed -i "s/namespace/namespace $1.Models/" Models/User.cs
