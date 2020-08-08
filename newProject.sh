@@ -20,7 +20,7 @@ mkdir "$1"
 cd "$1"
 
 # Copy skeleton files for project type
-cp -r ~/Documents/skeletons/$2/* .
+cp -r $SKELETONS/$2/* .
 
 # Use github api to create remote repo
 curl --user "jtclayt" --data '{"name": '\"$1\"', "private": false}' https://api.github.com/user/repos

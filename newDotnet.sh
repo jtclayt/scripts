@@ -15,8 +15,8 @@ dotnet new web --no-https -o "$1"
 cd "$1"
 
 # Copy in base files
-cp -r ~/Documents/skeletons/dotnet/default/* .
-cat ~/Documents/skeletons/dotnet/files/Startup.cs > Startup.cs
+cp -r $SKELETONS/dotnet/default/* .
+cat $SKELETONS/dotnet/files/Startup.cs > Startup.cs
 sed -i "s/namespace/namespace $1/" Startup.cs
 sed -i "s/namespace/namespace $1.Controllers/" Controllers/HomeController.cs
 sed -i "s/namespace/namespace $1.Models/" Models/User.cs
@@ -28,7 +28,7 @@ echo '@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers' >> Views/_ViewImport
 if [ $# -eq 3 ] && [[ $3 == 'git' ]]; then
   echo "Creating GitHub repo..."
   # Copy in git ignore file
-  cp ~/Documents/skeletons/dotnet/files/.gitignore .
+  cp $SKELETONS/dotnet/files/.gitignore .
   # Use github api to create remote repo
   res=$(curl --user "jtclayt" --data '{"name": '\"$2\"', "private": false}' https://api.github.com/user/repos)
   if [[ $res =~ "Bad credentials" ]]; then

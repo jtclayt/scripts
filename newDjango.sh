@@ -12,23 +12,23 @@ if [ $# -lt 1 ]; then
 fi
 
 # Make project directory and change to it
-source ~/Documents/dojo/envs/djangoEnv/bin/activate
+source $DJANGO_ENV/bin/activate
 echo "Starting project $1..."
 django-admin startproject "$1"
 cd "$1"
 
-# Add static folder for root
-echo "Coppying root static folder..."
-cp -r ~/Documents/skeletons/django/static .
+# Add python interpreter setting and git ignore
+cp -r $SKELETONS/django/.vscode .
+echo .vscode > .gitignore
 
 # Create main app, add templates, static files, and update urls.py and views.py
 echo "Starting app..."
 python manage.py startapp app
 cd app
 echo "Coppying templates, static, urls.py, and views.py into app..."
-cp -r ~/Documents/skeletons/django/app/* .
-cat ~/Documents/skeletons/django/files/app_urls.py > urls.py
-cat ~/Documents/skeletons/django/files/views.py > views.py
+cp -r $SKELETONS/django/app/* .
+cat $SKELETONS/django/files/app_urls.py > urls.py
+cat $SKELETONS/django/files/views.py > views.py
 cd ..
 
 # Create users app, add templates, static files, and update urls.py and views.py
@@ -36,20 +36,20 @@ echo "Starting users..."
 python manage.py startapp users
 cd users
 echo "Coppying templates, static, urls.py, and views.py into app..."
-cp -r ~/Documents/skeletons/django/users/static .
-cp -r ~/Documents/skeletons/django/users/templates .
-cp ~/Documents/skeletons/django/users/forms.py .
-cat ~/Documents/skeletons/django/users/urls.py > urls.py
-cat ~/Documents/skeletons/django/users/views.py > views.py
-cat ~/Documents/skeletons/django/users/models.py > models.py
+cp -r $SKELETONS/django/users/static .
+cp -r $SKELETONS/django/users/templates .
+cp $SKELETONS/django/users/forms.py .
+cat $SKELETONS/django/users/urls.py > urls.py
+cat $SKELETONS/django/users/views.py > views.py
+cat $SKELETONS/django/users/models.py > models.py
 cd ..
 
 # Make changes to settings.py and urls.py in project folder
 cd "$1"
 echo "Updating settings.py and urls.py in project..."
 sed -i "s/INSTALLED_APPS = \[/INSTALLED_APPS = \[\n    'app',\n    'users',/" settings.py
-cat ~/Documents/skeletons/django/files/settings.py >> settings.py
-cat ~/Documents/skeletons/django/files/urls.py > urls.py
+cat $SKELETONS/django/files/settings.py >> settings.py
+cat $SKELETONS/django/files/urls.py > urls.py
 cd ..
 
 if [[ $2 == 'git' ]]; then
@@ -63,7 +63,7 @@ if [[ $2 == 'git' ]]; then
     exit 1
   fi
   # Add .gitignore
-  cp ~/Documents/skeletons/django/files/.gitignore .
+  cp $SKELETONS/django/files/.gitignore .
   # Git stuff to push local repo up with an initial commit
   git init
   git remote add origin git@github.com:jtclayt/"$1".git
