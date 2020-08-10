@@ -9,22 +9,31 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-# Make project directory and change to it
+# Make project directory, add entity framework packages and change to project
 echo "Starting ASP.NET project $1..."
 dotnet new web --no-https -o "$1"
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 3.1.1
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.5
 cd "$1"
 
 # Copy in base files
 cp -r $SKELETONS/dotnet/default/* .
 cat $SKELETONS/dotnet/files/Startup.cs > Startup.cs
 cat $SKELETONS/dotnet/files/csproj.txt > $1.csproj
-sed -i "s/namespace/namespace $1/" Startup.cs
-sed -i "s/namespace/namespace $1.Controllers/" Controllers/HomeController.cs
-sed -i "s/namespace/namespace $1.Models/" Models/User.cs
+sed -i "s/ProjectName/$1/g" Startup.cs
+sed -i "s/ProjectName/$1/g" Controllers/HomeController.cs
+sed -i "s/ProjectName/$1/g" Models/User.cs
+sed -i "s/ProjectName/$1/g" Models/MyContext.cs
 
 echo "@using $1" > Views/_ViewImports.cshtml
 echo "@using $1.Models" >> Views/_ViewImports.cshtml
 echo '@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers' >> Views/_ViewImports.cshtml
+
+# Add entity framework and configure database connection settings
+cp $SKELETONS/dotnet/files/appsettings.json .
+cp $SKELETONS/dotnet/files/appsettings.Development.json .
+sed -i "s/ProjectName/$1/" appsettings.json
+sed -i "s/ProjectName/$1/" appsettings.Development.json
 
 if [ $# -eq 3 ] && [[ $3 == 'git' ]]; then
   echo "Creating GitHub repo..."
