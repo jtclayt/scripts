@@ -15,6 +15,7 @@ dotnet new web --no-https -o "$1"
 cd "$1"
 
 # Copy in base files
+cp $SKELETONS/dotnet/files/omnisharp.json .
 cp -r $SKELETONS/dotnet/default/* .
 cat $SKELETONS/dotnet/files/Startup.cs > Startup.cs
 cat $SKELETONS/dotnet/files/csproj.txt > $1.csproj
