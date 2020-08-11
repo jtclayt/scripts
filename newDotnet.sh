@@ -9,12 +9,14 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-# Make project directory, add entity framework packages and change to project
+# Make project directory and change to project
 echo "Starting ASP.NET project $1..."
 dotnet new web --no-https -o "$1"
+cd "$1"
+
+# Add entity framework packages
 dotnet add package Pomelo.EntityFrameworkCore.MySql --version 3.1.1
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.5
-cd "$1"
 
 # Copy in base files
 cp -r $SKELETONS/dotnet/default/* .
