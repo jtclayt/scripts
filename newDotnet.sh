@@ -14,10 +14,6 @@ echo "Starting ASP.NET project $1..."
 dotnet new web --no-https -o "$1"
 cd "$1"
 
-# Add entity framework packages
-dotnet add package Pomelo.EntityFrameworkCore.MySql --version 3.1.1
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.5
-
 # Copy in base files
 cp -r $SKELETONS/dotnet/default/* .
 cat $SKELETONS/dotnet/files/Startup.cs > Startup.cs
@@ -30,6 +26,10 @@ sed -i "s/ProjectName/$1/g" Models/Context.cs
 echo "@using $1" > Views/_ViewImports.cshtml
 echo "@using $1.Models" >> Views/_ViewImports.cshtml
 echo '@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers' >> Views/_ViewImports.cshtml
+
+# Add entity framework packages
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 3.1.1
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.5
 
 # Add entity framework and configure database connection settings
 cp $SKELETONS/dotnet/files/appsettings.json .
