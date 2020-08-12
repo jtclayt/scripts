@@ -21,7 +21,9 @@ cat $SKELETONS/dotnet/files/Startup.cs > Startup.cs
 cat $SKELETONS/dotnet/files/csproj.txt > $1.csproj
 sed -i "s/ProjectName/$1/g" Startup.cs
 sed -i "s/ProjectName/$1/g" Controllers/HomeController.cs
+sed -i "s/ProjectName/$1/g" Controllers/UserController.cs
 sed -i "s/ProjectName/$1/g" Models/User.cs
+sed -i "s/ProjectName/$1/g" Models/LoginUser.cs
 sed -i "s/ProjectName/$1/g" Models/Context.cs
 
 echo "@using $1" > Views/_ViewImports.cshtml
