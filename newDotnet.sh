@@ -15,7 +15,7 @@ dotnet new web --no-https -o "$1"
 cd "$1"
 
 # Copy in base files
-cp $SKELETONS/dotnet/files/omnisharp.json .
+# cp $SKELETONS/dotnet/files/omnisharp.json .
 cp -r $SKELETONS/dotnet/default/* .
 cat $SKELETONS/dotnet/files/Startup.cs > Startup.cs
 cat $SKELETONS/dotnet/files/csproj.txt > $1.csproj
@@ -36,9 +36,9 @@ dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.5
 
 # Add entity framework and configure database connection settings
 cp $SKELETONS/dotnet/files/appsettings.json .
-cp $SKELETONS/dotnet/files/appsettings.Development.json .
+# cp $SKELETONS/dotnet/files/appsettings.Development.json .
 sed -i "s/ProjectName/$1/" appsettings.json
-sed -i "s/ProjectName/$1/" appsettings.Development.json
+# sed -i "s/ProjectName/$1/" appsettings.Development.json
 
 if [ $# -eq 3 ] && [[ $3 == 'git' ]]; then
   echo "Creating GitHub repo..."
