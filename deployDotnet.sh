@@ -12,7 +12,7 @@ sudo cat deploy/nginx.txt > /etc/nginx/sites-available/default
 # Setup mysql
 sudo apt update
 sudo apt install mysql-server -y
-sudo mysql -Bse "show databases;"
+sudo mysql -Bse "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';FLUSH PRIVILEGES;exit;"
 
 # Setup dotnet
 cd ~
