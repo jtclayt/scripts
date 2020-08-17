@@ -6,8 +6,9 @@ cd ..
 # Set Nginx
 sudo apt update
 sudo apt install nginx -y
-sudo rm /etc/nginx/sites-available/default
+sudo chmod 766 /etc/nginx/sites-available/default
 sudo cat deploy/nginx.txt > /etc/nginx/sites-available/default
+sudo service nginx restart
 
 # Setup mysql
 sudo apt update
