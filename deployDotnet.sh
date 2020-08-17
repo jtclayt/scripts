@@ -1,26 +1,15 @@
 #!/bin/bash
 # Author: Justin Clayton
-# This script automates deploying an ASP.NET project with a mysql database.
+# This script automates building an ASP.NET project with a mysql database.
 
+# Setup database
 cd ..
-# Set Nginx
-sudo apt update
-sudo apt install nginx -y
-sudo rm /etc/nginx/sites-available/default
-sudo cat deploy/nginx.txt > /etc/nginx/sites-available/default
+dotnet restore
+dotnet ef migrations add DeployMigration
+dotnet ef database update
 
-# Setup mysql
-sudo apt update
-sudo apt install mysql-server -y
-sudo mysql -Bse "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';FLUSH PRIVILEGES;exit;"
-
-# Setup dotnet
-cd ~
-wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-sudo apt-get install apt-transport-https
-sudo apt-get update
-sudo apt-get install -y dotnet-sdk-3.1
-dotnet tool install dotnet-ef --global
-sudo reboot
-echo 'Dont forget to add appsettings.json file!'
+# Setup supervisor
+sudo apt install supervisor -y
+dotnet publish
+sudo cat deploy/supervisor.txt > "/etc/supervisor/conf.d/$1.conf"
+sudo service supervisor restart
