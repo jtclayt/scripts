@@ -25,7 +25,7 @@ sudo npx create-react-app client
 sudo chown -R jc:jc client
 cd client
 sudo rm README.md
-sudo npm install axios
+sudo npm install axios @reach/router
 sudo rm -rf .git .gitignore
 cd ..
 
