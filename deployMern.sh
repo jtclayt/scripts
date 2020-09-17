@@ -44,7 +44,7 @@ service mongod status
 
 # configure nginx
 sudo chmod 700 /etc/nginx/sites-available/default
-cat ~/$repoName/deploy/nginx-config.text > /etc/nginx/sites-available/default
+cat ~/$repoName/deploy/nginx-config.txt > /etc/nginx/sites-available/default
 cd ~/$repoName/server
 sudo service nginx restart
 
